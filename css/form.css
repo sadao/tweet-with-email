@@ -1,0 +1,40 @@
+﻿    #demo {
+        width:60%;
+    }
+    #demo ul {
+        list-style:none;
+        margin:0; padding:0;
+    }
+    #demo li {
+        list-style:none;
+        margin:0; padding:6px;
+        clear:both;
+    }
+    #demo label {
+        display:block;
+        font-weight:bold;
+        color:#666;
+    }
+    #demo li span {
+        float:left;
+        margin:0 5px 0 0; padding:0;
+    }
+    #demo li span label {
+        color:#999;
+        font-weight:normal;
+        font-size:80%;
+    }
+    #demo input.field,
+    #demo textarea {
+        background:#fff url("img/css/fieldborder.png") repeat-x 0 0;
+        border:1px solid #ddd;
+        border-top-color:#ccc;
+        border-left-color:#ccc;
+        padding:3px;
+    }
+    #demo textarea {
+        width:100%;
+    }
+    #demo input#email {
+        width:200px;
+    }
