@@ -1,0 +1,31 @@
+application: tweet-with-email
+version: 2
+runtime: python
+api_version: 1
+
+handlers:
+- url: /css
+  static_dir: css
+
+- url: /js
+  static_dir: js
+
+- url: /images
+  static_dir: images
+
+- url: /_ah/mail/.+
+  script: main.py 
+  login: admin
+
+- url: /app/.*
+  script: main.py
+  login: required
+
+- url: /html
+  script: html/(.html) 
+
+- url: /.*
+  script: main.py
+
+inbound_services:
+- mail

@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>メールでつぶやく。TEM</title>
+<meta name="keywords" content="Twitter, ツィッター, Tweet, ツィッター, メール, メールでTwitter, リンギオ" />
+<meta name="description" content="メールでツィート" />
+<link href="/css/templatemo_style.css" rel="stylesheet" type="text/css" />
+<link href="/css/fullsize.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="/css/form.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="/css/button.css" media="screen" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.fullsize.minified.js"></script>
+<script language="javascript" type="text/javascript">
+$(function(){
+				$("div.templatemo_gallery img").fullsize();
+			});
+</script>
+
+    <script type="text/javascript">
+      <!--
+      function deleteSubmit() {
+        document.demo.action = "/app/remove/";
+        document.demo.submit();
+      }
+      function tweetSubmit() {
+        document.demo.action = "/app/tweet/";
+        document.demo.submit();
+      }
+      // -->
+    </script>
+
+</head>
+<body>
+	<div id="templatemo_container">
+    	<div id="templatemo_content_area">
+        	<div id="templaetmo_left">
+            	<div id="templatemo_logo_area">
+                	<div id="templaetmo_logo">
+                    	TEM
+                    </div>
+                    <div id="templaetmo_slogan">
+                    	TweEt with e-Mail
+                    </div>
+                </div>
+                
+                <div class="templatemo_menu">
+                	<ul>
+						<li><a href="/app/" class="current">ログイン</a></li>
+						<li><a href="/app/" {% if not current_twitter %}class="current"{% endif %}>一覧</a></li>
+						<li><a href="{{ logout_url }}">ログアウト</a></li>
+					</ul>
+                </div>
+                
+                <div class="templatemo_section_1">
+                	<h1>Quick Contact</h1>
+					<p>
+<!-- Twitter Widget -->
+    <div id="twitter">
+      <script src="http://widgets.twimg.com/j/2/widget.js"></script>
+      <script>
+      new TWTR.Widget({
+        version: 2,
+        type: 'profile',
+        rpp: 4,
+        interval: 6000,
+        width: 186,
+        height: 300,
+        theme: {
+          shell: {
+            background: '#b3afb3',
+            color: '#ffffff'
+          },
+          tweets: {
+            background: '#f7f4f7',
+            color: '#5acded',
+            links: '#4aed05'
+          }
+        },
+        features: {
+          scrollbar: false,
+          loop: false,
+          live: false,
+          hashtags: true,
+          timestamp: true,
+          avatars: false,
+          behavior: 'all'
+        }
+      }).render().setUser('ElRingio').start();
+      </script>
+    </div>
+<!-- Twitter Widget -->
+					</p>
+
+			  </div>
+
+            </div><!-- End Of left -->
+            
+            <div id="templaetmo_right">
+            	<div id="templaetmo_right_top">
+                	<h1>TEM の管理画面へようこそ</h1>
+                </div>
+                <div id="templaetmo_right_mid">
+                	<div class="templaetmo_one_col">
+                      <div class="cleaner"></div>
+					</div>
+                    
+                    <div class="templatemo_two_col">
+                    	<h1>メールアドレス一覧</h1>
+{% if owned_twitters %}
+                    	<h2>Twitterアカウント名@ドメイン</h2>
+  {% for twitter in owned_twitters %}
+                        <p><a href="/app/twitter/?id={{twitter.key}}">{{ twitter.twitter_id }}@tweet-with-email.appspotmail.com</a></p>
+  {% endfor %}
+{% else %}
+                        <p>まだ登録がありません</p>
+{% endif %}
+                    </div>
+                    
+                    <div class="templatemo_v_line">
+                    </div>
+                    
+                    <div class="templatemo_two_col templaetmo_two_col_right">
+                    	{% if current_twitter %}
+                    	<h1>更新</h1>
+                    	{% else %}
+                    	<h1>新規登録</h1>
+                    	{% endif %}
+                        <form id="demo" name="demo" action="/app/register/" method="POST">
+                        <ul>
+                            <li>
+                                <label for="name">Twitterアカウント名：</label>
+                                <input id="email" name="twitter_id" type="text" class="field" value="{% if current_twitter %}{{ current_twitter.twitter_id }}{% endif %}" maxlength="80" tabindex="1" {% if current_twitter %}disabled{% endif %}/><br />
+                                {% if current_twitter %}
+                                <input type="hidden" name="twitter_id" value="{{ current_twitter.twitter_id }}">
+                                {% endif %}
+                            </li>
+                            <li>
+                                <label for="email">Cunsumer Key：</label>
+                                <input id="email" name="consumer_key" type="text" class="field" value="{% if current_twitter %}{{ current_twitter.consumer_key }}{% endif %}" maxlength="80" tabindex="3" /> 
+                            </li>
+                            <li>
+                                <label for="message">Cunsumer secret：</label>
+                                <input id="email" name="consumer_secret" type="text" class="field" value="{% if current_twitter %}{{ current_twitter.consumer_secret }}{% endif %}" maxlength="80" tabindex="3" /> 
+                            </li>
+                            <li>
+                                <label for="email">Access Token：</label>
+                                <input id="email" name="access_token" type="text" class="field" value="{% if current_twitter %}{{ current_twitter.access_token }}{% endif %}" maxlength="80" tabindex="3" /> 
+                            </li>
+                            <li>
+                                <label for="message">Access Token Secret：</label>
+                                <input id="email" name="access_token_secret" type="text" class="field" value="{% if current_twitter %}{{ current_twitter.access_token_secret }}{% endif %}" maxlength="80" tabindex="3" /> 
+                            </li>
+                            {% if current_twitter %}
+                            <li>
+                                <div class="buttons">
+                                    <button type="submit" class="positive" name="save"><img src="/images/apply2.png" alt=""/>更新</button>
+                                    <button type="button" class="negative" onClick="deleteSubmit();"><img src="/images/cross.png" alt=""/>削除</button>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="buttons">
+                                    <button type="button" class="regular" onClick="tweetSubmit();"><img src="/images/textfield_key.png" alt=""/>Testつぶやき</button>
+                                </div>
+                            </li>
+                              {% if result_test_tweet %}
+                            <li>{{ result_test_tweet }}</li>
+                              {% endif %}
+                            {% else %}
+                            <li>
+                                <div class="buttons">
+                                    <button type="submit" class="positive" name="save"><img src="/images/apply2.png" alt=""/>登録</button>
+                                </div>
+                            </li>
+                            {% endif %}
+                        </ul>
+                        </form>
+                   </div>
+                    
+                    <div class="cleaner"></div>
+                    
+                    <div class="templatemo_h_line"></div>
+                    
+                    <div class="templatemo_section_2">
+                    	<div class="templatemo_section_2_top">
+                        </div>
+                        
+                        <div class="templatemo_section_2_mid">
+                        	<h1>Twitterアカウント名以外の情報について</h1>
+                            <img src="/images/templatemo_icon_2.png" alt="News And Events" />
+                        	<p><a href="http://blog.mudaimemo.com/2010/03/google-app-engine-twitteroauth.html" target="_brank">コチラ</a>などを参考にして入手してください。</p>
+                            <p></p>
+                      </div>
+                        
+                        <div class="templatemo_section_2_bottom">
+                        </div>
+                    </div>
+                </div><!-- End Of right mid-->
+                
+                <div id="templaetmo_right_bottom">
+            		<div id="templatemo_footer">
+                    	Copyright © 2024 <a href="#">Ringio</a> | Designed by <a href="http://www.templatemo.com/page/1" target="_parent">Free CSS Templates</a>
+                    </div>
+	            </div>
+                    
+			</div><!-- End Of right-->
+
+            <div class="cleaner"></div>
+        </div><!-- End Of Content area -->
+    </div><!-- End Of Container -->
+
+<!--  Free CSS Templates by TemplateMo.com  -->
+</body>
+</html>
