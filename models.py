@@ -5,6 +5,7 @@ from google.appengine.api import users
 # Twitterモデル
 class Twitter(db.Model):
   owner = db.UserProperty(required=True)
+  mailaddress = db.StringProperty()
   twitter_id = db.StringProperty()
   consumer_key = db.StringProperty()
   consumer_secret = db.StringProperty()

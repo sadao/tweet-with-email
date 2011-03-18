@@ -151,6 +151,15 @@ $(function(){
                                 <label for="message">Access Token Secret：</label>
                                 <input id="email" name="access_token_secret" type="text" class="field" value="{% if current_twitter %}{{ current_twitter.access_token_secret }}{% endif %}" maxlength="80" tabindex="3" /> 
                             </li>
+<!--
+                            <li>
+                                <label for="name">(ツイートの受取り)<br />メールアドレス：</label>
+                                <input id="email" name="mailaddress" type="text" class="field" value="{% if current_twitter %}{{ current_twitter.mailaddress }}{% endif %}" maxlength="80" tabindex="1"/><br />
+                                {% if current_twitter %}
+                                <input type="hidden" name="mailaddress" value="{{ current_twitter.mailaddress }}">
+                                {% endif %}
+                            </li>
+-->
                             {% if current_twitter %}
                             <li>
                                 <div class="buttons">
